@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+
+  webapp:
+      container_name: payment-app
+      image: payment-app
+      build:
+        context: .
+        dockerfile: Dockerfile
+      network_mode: "host"
+      volumes:
+        - ./logs:/usr/local/tomcat/logs
+      restart: on-failure
+      depends_on: 
+        - postgres
+
+  postgres:
+      container_name: postgres_db
+      image: postgres:11-alpine
+      network_mode: "host"
+      volumes:
+        - ./init-database.sh:/docker-entrypoint-init.d/init-database.sh
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_PASSWORD: "Admin@777"
+        POSTGRES_DB: "DHDB"
+        PGPORT: "5432"
+        POSTGRES_USER: "Admin"
+      restart: "on-failure"
+
+volumes:
+  postgres_data:
