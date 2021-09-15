@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context reloadable="true" privileged="true">
+  <WatchedResource>src/main/webapp/WEB-INF/web.xml</WatchedResource>
+  <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+  <Resource name="jdbc/DHDB" auth="Container" type="javax.sql.DataSource"
+               maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+               username="Admin" password="" driverClassName="org.postgresql.Driver"
+               url="jdbc:postgresql://localhost:5432/"/>
+</Context>
